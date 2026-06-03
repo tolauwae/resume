@@ -1,6 +1,6 @@
 // Colour scheme
 
-#let highlight = rgb(0, 88, 66) // (77, 91, 75)
+#let highlight = rgb(30, 102, 245) // (77, 91, 75)
 
 // #2A2D31 Jet
 // #6F5392 Royal Purple
@@ -9,7 +9,9 @@
 // #799ACC Blue Gray
 // #468F92 Viridian Green
 // #B2D1C9 Opal
-// #005842 Castleton Green
+// #1e66f5 Castleton Green
+//
+// #1e66f5 Blue profile picture
 
 #let subdued = rgb(92, 95, 119)
 
