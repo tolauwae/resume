@@ -11,18 +11,21 @@
 // #B2D1C9 Opal
 // #005842 Castleton Green
 
-#let subdued = rgb(92, 95, 119)
+#let subdued = rgb("#526b65")
 
 #let smaller(it) = text(size: 8pt, it)
 
 #let dividor = [
     #v(1.0em)
-    #line(length: 100%, stroke: 0.5pt)
+    #line(
+      length: 100%,
+      stroke: (paint: rgb("#8fa39f"), thickness: 0.45pt),
+    )
 ]
 
 // Styling
 
-#set line(stroke: highlight)
+#set line(stroke: black)
 
 //#show link: set text(fill: subdued, style: "italic");
 
@@ -109,7 +112,7 @@
             content.push([
                 #link(docs, image("icons/docs.svg", height: 1em))])
             }
-            #grid(columns: 4, align: alignment.horizon, column-gutter: 3pt, ..content)
+            #grid(columns: 5, align: alignment.horizon, column-gutter: 3pt, ..content)
         ]
     ]
 
@@ -161,15 +164,11 @@
 // Content
 
 #let title = [
-    #show heading: set block(below: 0.4em)
-    #show heading: set text(font: "Lusitana", weight: 700, size: 1.9em, spacing: 0.2em)
-    #set par(leading: 0.3em)
-    //#set align(center)
+        #show heading: set block(below: 0.4em)
+        #show heading: set text(font: "Lusitana", weight: 700, size: 1.9em, spacing: 0.2em)
+        #set par(leading: 0.2em)
 
-    //= #upper(text(font: ("Cambo"))[T o m #h(1em) L a u w a e r t s])
-    //#heading[Tom\ #h(3.5pt)Lauwaerts]
-    #heading[#text(fill: black, size: 18pt, style: "italic")[dr.] Tom Lauwaerts]
-    //#upper(text(fill: subdued, weight: 400, size: 0.8em, "Researcher specializing in Programming Languages"))
+        #heading[#text(fill: subdued, size: 18pt, style: "italic")[dr.] Tom Lauwaerts]
 ]
 
 // Page
@@ -203,61 +202,60 @@
 #let lan = text(size: 8pt)[
         #set text(fill: subdued)
         #grid(columns: 7, gutter: 5pt, align: alignment.horizon,
-            //[*Dutch* #sym.dot.op Native], [*English* #sym.dot.op High professional proficiency], [*French* #sym.dot.op Elementary]
-            [*Dutch* Native], sym.dot.op, [*English* High professional proficiency], sym.dot.op, [*French* Elementary], sym.dot.op, [*Chinese* Novice]
+            [*Dutch* Native], sym.dot.op, [*English* High proficiency], sym.dot.op, [*French* Elementary], sym.dot.op, [*Chinese* Novice]
         )
     ]
 
 
 #[
-#set align(center)
-    #title
-    #contact
-    #lan
+    #block(
+        width: 100%,
+        fill: rgb("#e8f2ef"),
+        inset: (top: 0pt, bottom: 0.6cm),
+        outset: (x: sidemargin, top: sidemargin),
+    )[
+        #set align(center)
+        #title
+        #contact
+        #lan
+    ]
 ]
 
 #let languages = [
-
-#dividor
 
 #grid(columns: columns, [
     === Languages
 ], [
     #grid(columns: 3, column-gutter: 1em,
     item("Dutch", "Native", [], oneline: true),
-    item("English", "High professional proficiency", [], oneline: true),
+    item("English", "High proficiency", [], oneline: true),
     item("French", "Elementary", [], oneline: true))
 ])
 ]
 
 #let education = [
-//#dividor
-#line(length: 100%, stroke: 0.5pt)
-
 #grid(columns: columns, [
     === Education // Opleiding
 ], [
-        #item("PhD. in Computer Science", "2021 - 2025", [Ghent University, TOPL lab], oneline: true)
+        #item("PhD in Computer Science", "2021 - 2025", [Ghent University, TOPL Lab], oneline: true)
 
-    #item("BSc. and MSc. in Computer Science", "2016 - 2021", [Ghent University, faculty of Sciences], oneline: true)
+    #item("BSc. and MSc. in Computer Science", "2016 - 2021", [Ghent University, Faculty of Sciences], oneline: true)
 ])
 ]
 
-#education
 
-#dividor
+
 #grid(columns: columns, [
     === Work experience
 ], [
-    // todo add duration to experience
+    #experience("Vrije Universiteit Brussel", "Post-doctoral Researcher", 2025, "present", "")
+
     #experience("Ghent University", "PhD Researcher: Programming Languages", 2021, 2025, "Research into debugging and testing tools with a strong formal foundation.", duration: "4 years")
 
     #experience("Ghent University",  "Teaching Assistant", 2021, 2025,
-        [
-        Supervising the tutorials and projects, and assisting oral exams for the courses: #text(style: "italic", "Fundamenten van programmeertalen"), and #text(style:"italic", "Logisch programmeren"). \ Coaching master students, and jury member for master dissertations.
-    ], duration: "4 years")
+        [Courses: #text(style: "italic", "Fundamenten van programmeertalen"), #text(style: "italic", "Logisch programmeren").], duration: "4 years")
 
-    #experience("Creative Therapy (startup)", "Embedded Software Developer (Internship)", "July", "August 2020", "Researching WebUSB technology and developing a USB gadget driver in Linux for WebUSB communication between the online platform and the hardware.")
+    #experience("Creative Therapy (startup)", "Embedded Software Developer (Internship)", "July", "August 2020", "") //, "Researching WebUSB technology and developing a USB gadget driver in Linux for WebUSB communication between the online platform and the hardware.")
 
     //#experience("Digipolis", "Software Developer", 2017, 2018, [Student job over two summers: 
     //    - Designing and developing chatbots using Linked Open Data for the #text(style: "italic", "Gentse Feesten"), for the city council of Ghent, and for tourism Ghent.
@@ -265,6 +263,8 @@
     //])
 ])
 
+#dividor
+#education
 
 #let services = [
 #dividor
@@ -273,11 +273,13 @@
 ], [
     // #item( "Member of the OCI and delegate to the CKO (UGent)", "2022 - 2025", "Delegated member to the CKO since sept 2024, and currently part of the focus group for the computer science bachelor and master program reforms.", oneline: true)
 
-    #item( "Science communication and outreach", "2021 - present", "Assisting with SID-in, Alumniday UGent, Unimath, and Computer Science Olympiad.", oneline: true)
+    #item( "Science communication and outreach", "2021 - present", "Alumniday UGent, Dag van de Wetenschap, Comp Sci Olympiad ...", oneline: true)
 
-    #item( "Open-source software contributor", "2021 - present", grid(columns: 3, column-gutter: 5pt, opensource("WARDuino", "TOPLLab/WARDuino"), sym.dot.op, opensource("latch", "TOPLLab/latch")), oneline: true)  // opensource("typst", "typst/typst")
+    #item( "Open-source software contributor", "2021 - present", grid(columns: 5, column-gutter: 5pt, opensource("WARDuino", "TOPLLab/WARDuino"), sym.dot.op, opensource("latch", "TOPLLab/latch"), sym.dot.op, opensource("personal projects", "tolauwae")), oneline: true) // opensource("typst", "typst/typst")
 ])
 ]
+
+#let miopaper = item("MIO: Multiverse Debugging in the Face of Input/Output", [2025-10 | *Tom Lauwaerts*, Maarten Steevens, Christophe Scholliers | Proceedings of the ACM on Programming Languages (PACMPL), Volume 9, Issue OOPSLA2], [I presented this work at the main track of the OOPSLA 2025 conference.], doi: "https://doi.org/10.1145/3763136", repo: "https://github.com/TOPLLab/MIO", artifact: "https://doi.org/10.5281/zenodo.15838624", slide: "https://tolauwae.github.io/oopsla25/")
 
 #let research-highlight = [
 
@@ -288,15 +290,7 @@
     
     #smaller(grid(columns: 3, column-gutter: 3pt, orcid("0000-0003-1262-8893"), researchgate("Tom-Lauwaerts"), googlescholar("https://scholar.google.com/citations?user=uHdt08sAAAAJ&hl=en&oi=ao")))
 
-], [
-    #item("Multiverse debugging on microcontrollers", [2025-10 | Conference paper (OOPSLA'25)], [], doi: "https://doi.org/10.1145/3763136", repo: "https://github.com/TOPLLab/MIO", artifact: "https://doi.org/10.5281/zenodo.15838624")
-
-    //#item("Latch: Enabling large-scale automated testing on constrained systems", "2024-12 | Science of Computer Programming Journal", [], doi: "https://doi.org/10.1016/j.scico.2024.103157", repo: "https://github.com/TOPLLab/latch")
-
-    //#item("WARDuino: An embedded WebAssembly virtual machine", "2024-06 | Journal of Computer Languages", [], doi: "https://doi.org/10.1016/j.cola.2024.101268", repo: "https://github.com/TOPLLab/WARDuino/", docs: "https://topllab.github.io/WARDuino/")
-
-    #item("Event-Based Out-of-Place Debugging", "2022-09-14 | Conference paper (MPLR'22)", [], doi: "https://doi.org/10.1145/3546918.3546920", docs: "https://topllab.github.io/WARDuino/reference/edward/", slide: "https://tolauwae.github.io/mplr22/")
-])
+], [#miopaper])
 ]
 
 #let presentations = [
@@ -325,9 +319,13 @@
     === Academic services
     //=== International collaborations & \ other research activities
 ], [
-    #item("DEBT workshop co-organizer", "2025", "Co-organizing the DEBT'25 workshop with Burcu Kulahcioglu Ozkan (TU Delft).", oneline: true, url: "https://2025.ecoop.org/home/debt-2025")
+    #item("ICOOOLPS workshop co-organizer", "2026 - 2027", "Co-organizing the ICOOOLPS'26 and ICOOOLPS'27 workshops.", oneline: true, url: "https://2026.ecoop.org/home/ICOOOLPS-2026")
 
-    #item("Programming artifact evaluation committee member", "2024 - 2026", "AEC member for the Programming conference and journal (volumes 9 and 10).", oneline: true, url: "https://2025.programming-conference.org/track/programming-2025-artifacts")
+    #item("ECOOP student volunteer chair and local organizer", "2026", "Part of the VUB team organizing ECOOP'26 in Brussels.", oneline: true, url: "https://2026.ecoop.org")
+
+    #item("DEBT workshop co-organizer", "2025", "Co-organizing the DEBT'25 workshop.", oneline: true, url: "https://2025.ecoop.org/home/debt-2025")
+
+    #item("Programming artifact evaluation committee member", "2024 - 2027", "AEC member for the Programming conference and journal (vol. 9, 10, 11, 12).", oneline: true, url: "https://2025.programming-conference.org/track/programming-2025-artifacts")
 
     //#item( "Active collaboration: Open Bot Brain", "2023 - present", "Research project with Francisco Ferreira Ruiz (Royal Holloway).", oneline: true)
 
@@ -359,12 +357,14 @@
     #heading(level: 2, grid(columns: 4, column-gutter: 3pt, align: alignment.horizon, "Scientific publications", smaller(orcid("0-000-000-000-000")), smaller(researchgate("Tom-Lauwaerts")), smaller(googlescholar("https://scholar.google.com/citations?user=uHdt08sAAAAJ&hl=en&oi=ao"))))
 
 // todo add full list of authors, and put own name in bold
-// todo add links for concolic multiverse debugging
 
 // todo full list: conference talks + collaborations + summer school
 
     //#item("OPLSS Summer school", "July 2021", "", oneline: true)
-    #item("MIO: Multiverse Debugging in the Face of Input/Output", [2025-10 | *Tom Lauwaerts*, Maarten Steevens, Christophe Scholliers | Proceedings of the ACM on Programming Languages (PACMPL)], [I will present this work at the main track of OOPSLA 2025 conference.], doi: "https://doi.org/10.1145/3763136", repo: "https://github.com/TOPLLab/MIO", artifact: "https://doi.org/10.5281/zenodo.15838624")
+    #item("Concolic Multiverse Debugging", [2026-06 | Maarten Steevens, *Tom Lauwaerts*, Christophe Scholliers | Special Issue of the 40th European Conference on Object-Oriented Programming (ECOOP 2026)], [An early version of this work was presented by myself at the final of the ISSTA'23 Research competition.], doi: "https://doi.org/10.1145/3678720.3685318", artifact: "https://doi.org/10.4230/DARTS.12.1.11")
+    #v(1em)
+
+    #miopaper
     #v(1em)
 
     #item("Foundations for Constrained Debugging Techniques", [2025-08 | *Tom Lauwaerts* | PhD dissertation (Universiteit Gent)], [], doi: "https://doi.org/10.1145/3763136", repo: "https://github.com/tolauwae/phd-thesis")
@@ -373,22 +373,17 @@
     #item("Latch: Enabling large-scale automated testing on constrained systems", [2024-12 | *Tom Lauwaerts*, Stefan Marr, Christophe Scholliers | Science of Computer Programming Journal], [I presented this work during a poster session at the ISSTA'23 conference.], doi: "https://doi.org/10.1016/j.scico.2024.103157", repo: "https://github.com/TOPLLab/latch")
     #v(1em)
 
-    #item("Concolic Multiverse Debugging", [2024-09-13 | Maarten Steevens, *Tom Lauwaerts*, Christophe Scholliers | Short paper (DEBT'24)], [An early version of this work was presented by myself at the final of the ISSTA'23 Research competition.], doi: "https://doi.org/10.1145/3678720.3685318")
-    #v(1em)
-
     #item("WARDuino: An embedded WebAssembly virtual machine", [2024-06 | *Tom Lauwaerts*, Robbert Gurdeep Singh, Christophe Scholliers | Journal of Computer Languages], [Presented at the International Conference on the Art, Science, and Engineering of Programming 2022, during a poster session and a dedicated demonstration.], doi: "https://doi.org/10.1016/j.cola.2024.101268", repo: "https://github.com/TOPLLab/WARDuino/", docs: "https://topllab.github.io/WARDuino/")
     #v(1em)
     
-    #item("Out-of-Place Debugging on Constraint Devices with the EDWARD Debugger (Demo)", [2023-07-17 | *Tom Lauwaerts*, Carlos Rojas Castillo, Elisa Gonzalez Boix, Christophe Scholliers | Short paper (DEBT'23)], [Demo presentation at the first Workshop on Future Debugging Techniques (DEBT'23).], doi: "https://doi.org/10.1145/3605155.3605862", slide: "https://tolauwae.github.io/debt.demo/")
+    #item("Out-of-Place Debugging on Constraint Devices with the EDWARD Debugger (Demo)", [2023-07 | *Tom Lauwaerts*, Carlos Rojas Castillo, Elisa Gonzalez Boix, Christophe Scholliers | Short paper (DEBT'23)], [Demo presentation at the first Workshop on Future Debugging Techniques (DEBT'23).], doi: "https://doi.org/10.1145/3605155.3605862", slide: "https://tolauwae.github.io/debt.demo/")
     #v(1em)
 
-    #item("Demo: Debugging Constraint Devices with EDWARD", [2023-06-18 | *Tom Lauwaerts*, Carlos Rojas Castillo, Elisa Gonzalez Boix, Christophe Scholliers | Short paper (MobiSys'23)], [Demo and poster presentation at the 21st ACM International Conference on Mobile Systems, Applications, and Services (MobiSys'23).], doi: "https://doi.org/10.1145/3581791.3597293")
+    #item("Demo: Debugging Constraint Devices with EDWARD", [2023-06 | *Tom Lauwaerts*, Carlos Rojas Castillo, Elisa Gonzalez Boix, Christophe Scholliers | Short paper (MobiSys'23)], [Demo and poster presentation at the 21st ACM International Conference on Mobile Systems, Applications, and Services (MobiSys'23).], doi: "https://doi.org/10.1145/3581791.3597293")
     #v(1em)
 
-    #item("Event-Based Out-of-Place Debugging", [2022-09-14 | *Tom Lauwaerts*, Carlos Rojas Castillo, Robbert Gurdeep Singh, Matteo Marra, Christophe Scholliers, Elisa Gonzalez Boix | Conference paper (MPLR'22)], [I presented this work at the main track of the 19th International Conference on Managed Programming Languages & Runtimes (MPLR'22).], doi: "https://doi.org/10.1145/3546918.3546920", docs: "https://topllab.github.io/WARDuino/reference/edward/", slide: "https://tolauwae.github.io/mplr22/")
+    #item("Event-Based Out-of-Place Debugging", [2022-09 | *Tom Lauwaerts*, Carlos Rojas Castillo, Robbert Gurdeep Singh, Matteo Marra, Christophe Scholliers, Elisa Gonzalez Boix | Conference paper (MPLR'22)], [I presented this work at the main track of the 19th International Conference on Managed Programming Languages & Runtimes (MPLR'22).], doi: "https://doi.org/10.1145/3546918.3546920", docs: "https://topllab.github.io/WARDuino/reference/edward/", slide: "https://tolauwae.github.io/mplr22/")
 
     //#v(1em)
     ////#heading(level: 2, grid(columns: 4, column-gutter: 3pt, align: alignment.horizon, "Artifacts", link("https://github.com/TOPLLab", image("icons/git.svg", height: 1em))))
     //== Other research activities
-
-
