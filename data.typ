@@ -41,7 +41,7 @@
     role: "Post-doctoral Researcher",
     start: 2025,
     end: "present",
-    description: "",
+    description: "Research into debugging and software development for the future.",
   ),
   (
     employer: "Ghent University",

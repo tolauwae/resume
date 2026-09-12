@@ -2,19 +2,28 @@
 
 // Colour scheme
 
-#let highlight = rgb(0, 88, 66) // (77, 91, 75)
+#let colour-schemes = (
+  jet: (
+    highlight: rgb("#2A2D31"),
+    header-background: rgb("#D8E1EA"),
+    subdued: rgb("#566B82"),
+    divider: rgb("#566B82"),
+  ),
+  green: (
+    highlight: rgb(0, 88, 66),
+    header-background: rgb("#e8f2ef"),
+    subdued: rgb("#526b65"),
+    divider: rgb("#8fa39f"),
+  ),
+)
 
-// #2A2D31 Jet
-// #6F5392 Royal Purple
-// #2C446F Dark Cornflower Blue
-// #6C7F93 Slate Gray
-// #799ACC Blue Gray
-// #468F92 Viridian Green
-// #B2D1C9 Opal
-// #005842 Castleton Green
+#let colour-scheme = colour-schemes.jet
 
-#let subdued = rgb("#526b65")
-#let divider-color = rgb("#8fa39f")
+#let black-color = rgb("#000000")
+#let highlight = colour-scheme.highlight
+#let header-background = colour-scheme.header-background
+#let subdued = colour-scheme.subdued
+#let divider-color = colour-scheme.divider
 
 #let smaller(it) = text(size: 8pt, it)
 
@@ -27,10 +36,6 @@
 ]
 
 // Styling
-
-#set line(stroke: black)
-
-//#show link: set text(fill: subdued, style: "italic");
 
 #show heading.where(level: 1): set text(fill: highlight)
 #show heading.where(level: 2): set text(fill: highlight)
@@ -46,35 +51,35 @@
   ], body))
 ]
 
-#let linkedin(id, color: rgb(0,0,0)) = {
+#let linkedin(id, color: black-color) = {
     social("https://linkedin.com/in/" + id, "icons/linkedin.svg", "")
 }
 
-#let github(id, color: rgb(0,0,0)) = {
+#let github(id, color: black-color) = {
     social("https://github.com/" + id, "icons/github.svg", "")
 }
 
-#let homepage(id, color: rgb(0,0,0)) = {
+#let homepage(id, color: black-color) = {
     social(id, "icons/homepage.svg", "")
 }
 
-#let mail(id, color: rgb(0,0,0)) = {
+#let mail(id, color: black-color) = {
     social("mailto:" + id, "icons/mail.svg", id)
 }
 
-#let phone(number, color: rgb(0, 0, 0)) = [
+#let phone(number, color: black-color) = [
     #grid(columns: 2, align: alignment.horizon, column-gutter: 3pt, image("icons/phone.svg", width: 1em, height: 1em), number)
 ]
 
-#let researchgate(id, color: rgb(0,0,0)) = {
+#let researchgate(id, color: black-color) = {
     social("https://researchgate.net/profile/" + id, "icons/researchgate.svg", "")
 }
 
-#let googlescholar(id, color: rgb(0,0,0)) = {
+#let googlescholar(id, color: black-color) = {
     social(id, "icons/google-scholar.svg", "")
 }
 
-#let orcid(id, color: rgb(0,0,0), full: false) = {
+#let orcid(id, color: black-color, full: false) = {
     social("https://orcid.org/" + id, "icons/orcid.svg", [#if full [#id] else []])
 }
 
@@ -211,7 +216,7 @@
 }
 
 #let publication-type-pill(entry) = box(
-    fill: rgb("#e8f2ef"),
+    fill: header-background,
     radius: 2pt,
     inset: (x: 3pt, y: 1.4pt),
 )[
@@ -369,7 +374,7 @@
 #[
     #block(
         width: 100%,
-        fill: rgb("#e8f2ef"),
+        fill: header-background,
         inset: (top: 0pt, bottom: 0.6cm),
         outset: (x: sidemargin, top: sidemargin),
     )[
@@ -394,7 +399,7 @@
 ])
 ]
 
-
+#v(0.5cm, weak: true)
 
 #grid(columns: columns, [
     === Work experience
